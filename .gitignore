@@ -3,3 +3,4 @@ package-lock.json
 
 # Ignore Folder
 node_modules/
+dist/
