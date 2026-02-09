@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Nomadic Chart</title>
+</head>
+<body>
+    <div id="org-chart-overview"></div>
+
+    <script>
+        // Data dummy untuk testing
+        const data = {
+            id: "CEO",
+            level: 0,
+            subLevel: 0,
+            content: `
+                <div style="padding: 10px;">
+                    <strong>Chief Executive Officer</strong><br>
+                    Responsible for the overall success of the business entity or other organization and for making top-level managerial decisions.
+                </div>
+            `,
+            supports: [
+                { id: "Secretary A", level: 4, content: "Assistant to CEO" },
+                { id: "Secretary B", level: 4, content: "Scheduler" },
+                { id: "Secretary C", level: 4 }
+            ],
+            children: [
+                { 
+                    id: "CBDO", 
+                    level: 0,
+                    subLevel: 0, 
+                    content: `
+                        <div style="padding: 10px;">
+                            <strong>Chief Business Development Officer</strong><br>
+                            Focuses on business growth, identifying new markets, and building relationships.
+                            <br><br>
+                            Key targets:
+                            <ul>
+                                <li>Market Expansion</li>
+                                <li>Strategic Partnerships</li>
+                            </ul>
+                        </div>
+                    `,
+                    children: [
+                        { id: "Manager A1", level: 2, subLevel: 1, children: [], content: "Area Manager North" },
+                        { id: "Manager A2", level: 2, subLevel: 1, children: [], content: "Area Manager South" }
+                    ] 
+                },
+                {
+                    id: "Vice President Accounting", 
+                    level: 1,
+                    subLevel: 1, 
+                    content: `
+                        <div style="padding: 10px;">
+                            Oversees all accounting functions.<br>
+                            Ensures compliance with financial regulations.<br>
+                            Manages audits and financial reporting.
+                        </div>
+                    `,
+                    children: [
+                        { id: "Supervisor A1", level: 3, subLevel: 1, children: [] },
+                        { id: "Supervisor A2", level: 3, subLevel: 1, children: [] },
+                        { id: "Staff A2", level: 4, subLevel: 2, children: [] }
+                    ] 
+                },
+                { 
+                    id: "Vice President Technology", 
+                    level: 1,
+                    subLevel: 1,
+                    supports: [{id: "Secretary", level: 4, content: "Tech Support"}],
+                    content: `
+                        <div style="display: flex; flex-direction: column;">
+                            <div style="font-size: 11px; color: #64748b; padding: 15px; text-align:justify;">
+                                <strong>Responsibilities:</strong><br>
+                                - Software Development<br>
+                                - Infrastructure Management<br>
+                                - Cybersecurity<br>
+                                <br>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    `,
+                    children: [
+                        { id: "Manager B1", level: 2, subLevel: 0, children: [] },
+                        { id: "Staff B1", level: 4, subLevel: 2, children: [] }
+                    ] 
+                },
+                { 
+                    id: "Vice President Operation", 
+                    level: 1,
+                    subLevel: 1, 
+                    content: "Operations oversight.",
+                    children: [
+                        { id: "Staff C1", level: 4, subLevel: 2, children: [] } 
+                    ] 
+                }
+            ]
+        };
+        const config = { 
+            spacingX: 220,
+            subLevelGap: 20,    
+            cardWidth: 200,     
+            cardHeight: 150,     
+            gapOut: 30,         
+            gapIn: 60,
+            supportOffset: 70   
+        };
+        const settings = {
+            0: { label: "CEO", type: 'gradient', angle: 90, stops: [{ color: "#1e293b", pos: 0 }, { color: "#334155", pos: 100 }], activeStopIndex: 0 },
+            1: { label: "Vice President", type: 'gradient', angle: 90, stops: [{ color: "#1d4ed8", pos: 0 }, { color: "#3b82f6", pos: 100 }], activeStopIndex: 0 },
+            2: { label: "Manager", type: 'gradient', angle: 90, stops: [{ color: "#047857", pos: 0 }, { color: "#10b981", pos: 100 }], activeStopIndex: 0 },
+            3: { label: "Supervisor", type: 'gradient', angle: 90, stops: [{ color: "#b45309", pos: 0 }, { color: "#f59e0b", pos: 100 }], activeStopIndex: 0 },
+            4: { label: "Staff", type: 'gradient', angle: 90, stops: [{ color: "#64748b", pos: 0 }, { color: "#94a3b8", pos: 100 }], activeStopIndex: 0 }
+        };
+
+        window.onload = () => {
+            const chart = new window.NomadicChart('org-chart-overview', data, config, settings);
+        };
+    </script>
+</body>
+</html>
