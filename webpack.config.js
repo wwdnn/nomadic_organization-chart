@@ -16,13 +16,12 @@ module.exports = (env, argv) => {
             library: {
                 name: 'NomadicChart',
                 type: 'umd',
-                export: 'default', // Gunakan 'default' jika Anda menggunakan 'export default class'
+                export: 'default',
             },
             globalObject: 'this',
             clean: true,
         },
 
-        // DevServer yang sudah diperbaiki sesuai schema
         devServer: {
             static: {
                 directory: path.join(__dirname, 'public'),
@@ -31,7 +30,7 @@ module.exports = (env, argv) => {
             port: 8080,
             open: true,
             hot: true,
-            historyApiFallback: true, // Berguna jika Anda menggunakan routing
+            historyApiFallback: true,
         },
 
         module: {
