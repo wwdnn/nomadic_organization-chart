@@ -49,7 +49,7 @@ export const UIFactory = {
 
         card.innerHTML = `
             <div class="card-header" style="width:100%; border-radius: 10px; background: ${options.gradient.css}; flex-shrink: 0;">
-                <div class="card-title" style="display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:18px; font-weight:bold; color: ${textColor}; padding:15px; text-align:center;">
+                <div class="card-title" style="align-items:center; justify-content:center; font-family:sans-serif; font-size:18px; font-weight:bold; color: ${textColor}; padding:15px; text-align:center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     ${node.title || node.id}
                 </div>
             </div>
@@ -83,8 +83,10 @@ export const UIFactory = {
     handleOverflow(card, config, node, onRebuild) {
         if (node._isContentExpanded) return;
 
-        requestAnimationFrame(() => {
-            if (card.scrollHeight > config.cardHeight) {
+        // Gunakan setTimeout agar memastikan rendering selesai
+        setTimeout(() => {
+            const content = card.querySelector('.card-content');
+            if (content && content.scrollHeight > content.clientHeight) {
                 const gradientOverlay = document.createElement('div');
                 gradientOverlay.className = 'show-more-gradient';
                 gradientOverlay.style.cssText = `
@@ -120,7 +122,7 @@ export const UIFactory = {
                 
                 card.appendChild(gradientOverlay);
             }
-        });
+        }, 0);
     },
 
     createCollapseBtn(isCollapsed, onClick) {
@@ -140,12 +142,12 @@ export const UIFactory = {
         return btn;
     },
 
-    createPath(d, isDashed = false) {
+    createPath(d, config, isDashed = false) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", d);
-        path.setAttribute("stroke", "#cbd5e1");
+        path.setAttribute("stroke", config.strokeColor || "#cbd5e1");
         path.setAttribute("fill", "none");
-        path.setAttribute("stroke-width", "2");
+        path.setAttribute("stroke-width", config.strokeWidth || 2);
         if (isDashed) path.setAttribute("stroke-dasharray", "4");
         return path;
     },

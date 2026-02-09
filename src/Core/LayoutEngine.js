@@ -5,7 +5,6 @@ export class LayoutEngine {
     }
 
     calculate(root) {
-        console.log("LayoutEngine: Calculate triggered", root);
         this.levelMaxGapOut = {}; 
         this._initializeNodes(root, 0);
         this._calculateInitialX(root, null, []);

@@ -60,7 +60,18 @@
                     children: [
                         { id: "Supervisor A1", level: 3, subLevel: 1, children: [] },
                         { id: "Supervisor A2", level: 3, subLevel: 1, children: [] },
-                        { id: "Staff A2", level: 4, subLevel: 2, children: [] }
+                        { id: "Staff A2", level: 4, subLevel: 2, content: `
+                        <div style="padding: 10px;">
+                            <strong>Chief Business Development Officer</strong><br>
+                            Focuses on business growth, identifying new markets, and building relationships.
+                            <br><br>
+                            Key targets:
+                            <ul>
+                                <li>Market Expansion</li>
+                                <li>Strategic Partnerships</li>
+                            </ul>
+                        </div>
+                    `, children: [] }
                     ] 
                 },
                 { 
@@ -103,7 +114,9 @@
             cardHeight: 150,     
             gapOut: 30,         
             gapIn: 60,
-            supportOffset: 70   
+            supportOffset: 70,
+            strokeColor: "#cbd5e1",
+            strokeWidth: 5
         };
         const settings = {
             0: { label: "CEO", type: 'gradient', angle: 90, stops: [{ color: "#1e293b", pos: 0 }, { color: "#334155", pos: 100 }], activeStopIndex: 0 },
